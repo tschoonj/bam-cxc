@@ -1,0 +1,9 @@
+MODULE BAM_CXC
+
+DESCRIPTION IDL bindings for the Color X-ray camera
+
+VERSION 0.1
+
+SOURCE Tom Schoonjans
+
+FUNCTION BAM_CXC_GET_DATA 0 0
