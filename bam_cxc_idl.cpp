@@ -6,6 +6,11 @@
 
 #define ARRLEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
+#define NPIXELX 264
+#define NPIXELY 264
+#define NCHANNELS 1024
+
+
 extern IDL_VPTR IDL_CDECL idl_bam_cxc_get_data(int argc, IDL_VPTR argv[]);
 
 static IDL_SYSFUN_DEF2 idl_bam_cxc_functions[] = {
@@ -29,28 +34,28 @@ extern "C" int IDL_Load(void) {
 
 
 IDL_VPTR IDL_CDECL idl_bam_cxc_get_data(int argc, IDL_VPTR argv[]) {
-	QSharedMemory shared_memory("fibonacci");
+	QSharedMemory shared_memory("photo");
 
 	if (!shared_memory.attach(QSharedMemory::ReadOnly)) {
-		IDL_MessageFromBlock(bam_cxc_msg_block, BAM_CXC_ERROR, IDL_MSG_LONGJMP, "Could not attach to shared memory block fibonacci");
+		IDL_MessageFromBlock(bam_cxc_msg_block, BAM_CXC_ERROR, IDL_MSG_LONGJMP, "Could not attach to shared memory block photo");
 	}
 
 	shared_memory.lock();
 	int size = shared_memory.size();
-	if (size != sizeof(int)*1000) {
-		IDL_MessageFromBlock(bam_cxc_msg_block, BAM_CXC_ERROR, IDL_MSG_LONGJMP, "Unexpected size for shared memory block fibonacci");
+	if (size != sizeof(unsigned int) * NPIXELX * NPIXELY * NCHANNELS) {
+		IDL_MessageFromBlock(bam_cxc_msg_block, BAM_CXC_ERROR, IDL_MSG_LONGJMP, "Unexpected size for shared memory block photo");
 	
 	}
-	const int *data = (const int *) shared_memory.data();
-	int *data_copy = (int *) malloc(sizeof(int)*1000);
-	memcpy(data_copy, data, sizeof(int)*1000);
+	const unsigned int *data = (const unsigned int *) shared_memory.data();
+	unsigned int *data_copy = (unsigned int *) malloc(sizeof(unsigned int) * NPIXELX * NPIXELY * NCHANNELS);
+	memcpy(data_copy, data, sizeof(int) * NPIXELX * NPIXELY * NCHANNELS);
 
 	shared_memory.unlock();
 	shared_memory.detach();
 
-	int n_dim = 1;
-	IDL_MEMINT dim[1] = {1000};
-	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_LONG, (UCHAR *) data_copy, (IDL_ARRAY_FREE_CB) free, 0);
+	int n_dim = 3;
+	IDL_MEMINT dim[3] = {NCHANNELS, NPIXELY, NPIXELX};
+	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG, (UCHAR *) data_copy, (IDL_ARRAY_FREE_CB) free, 0);
 
 	return rv;
 }

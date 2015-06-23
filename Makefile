@@ -6,9 +6,6 @@ all: fibonacci bam_cxc.so
 #Linux
 IDL_CFLAGS=-I/usr/local/exelis/idl/external/include 
 
-fibonacci: fibonacci.cpp
-	g++ -o fibonacci $(shell pkg-config --cflags QtCore) fibonacci.cpp $(shell pkg-config --libs QtCore)
-
 #Mac OS X
 #bam_cxc.so: bam_cxc_idl.cpp
 #	g++ $(shell pkg-config --cflags QtCore) $(IDL_CFLAGS) -c -fno-common -o bam_cxc_idl.o bam_cxc_idl.cpp
@@ -19,4 +16,4 @@ bam_cxc.so: bam_cxc_idl.cpp
 	g++ -shared -fPIC -Wl,-soname -Wl,bam_cxc.so -o bam_cxc.so bam_cxc_idl.o $(shell pkg-config --libs QtCore)
 
 clean:
-	rm -f fibonacci bam_cxc_idl.o bam_cxc.so
+	rm -f bam_cxc_idl.o bam_cxc.so
