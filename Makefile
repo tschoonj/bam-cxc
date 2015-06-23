@@ -1,4 +1,4 @@
-all: fibonacci bam_cxc.so
+all: bam_cxc.so
 
 #Mac OS X
 #IDL_CFLAGS=-I/Applications/exelis/idl/external/include 
