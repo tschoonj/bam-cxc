@@ -106,7 +106,7 @@ IDL_VPTR IDL_CDECL idl_bam_cxc_get_hits(int argc, IDL_VPTR argv[]) {
 	
 	int n_dim = 2;
 	IDL_MEMINT dim[2] = {NPIXELY, NPIXELX};
-	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
+	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG64, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
 
 	return rv;
 }
@@ -117,7 +117,7 @@ IDL_VPTR IDL_CDECL idl_bam_cxc_get_energy(int argc, IDL_VPTR argv[]) {
 	
 	int n_dim = 2;
 	IDL_MEMINT dim[2] = {NPIXELY, NPIXELX};
-	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
+	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG64, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
 
 	return rv;
 }
@@ -128,7 +128,7 @@ IDL_VPTR IDL_CDECL idl_bam_cxc_get_miss(int argc, IDL_VPTR argv[]) {
 	
 	int n_dim = 2;
 	IDL_MEMINT dim[2] = {NPIXELY, NPIXELX};
-	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
+	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG64, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
 
 	return rv;
 }
@@ -139,7 +139,7 @@ IDL_VPTR IDL_CDECL idl_bam_cxc_get_event(int argc, IDL_VPTR argv[]) {
 	
 	int n_dim = 2;
 	IDL_MEMINT dim[2] = {NPIXELY, NPIXELX};
-	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
+	IDL_VPTR rv = IDL_ImportArray(n_dim, dim, IDL_TYP_ULONG64, (UCHAR *) data, (IDL_ARRAY_FREE_CB) free, 0);
 
 	return rv;
 }
